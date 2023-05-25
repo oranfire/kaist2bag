@@ -1,3 +1,13 @@
+# 2023.5.25
+Modify the original code to support stereo_imu rosbag generation.
+
+New simplied rosbag generation command as follows (no need for multiple rosbag merging):
+```
+source devel/setup.bash
+roslaunch kaist2bag kaist2bag.launch
+```
+
+
 # kaist2bag
 A tool to convert KAIST urban dataset to rosbag.
 
