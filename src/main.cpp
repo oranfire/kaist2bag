@@ -1,6 +1,7 @@
 #include <rosbag/bag.h>
 #include <std_msgs/Int32.h>
 #include <ros/ros.h>
+#include "stereo_imu_converter.h"
 #include "altimeter_converter.h"
 #include "encoder_converter.h"
 #include "fog_converter.h"
@@ -23,6 +24,7 @@ enum SensorType {
     kVelodyne,
     kSick,
     kStereo,
+    kStereoImu,
     kSensorTypeCount
 };
 
@@ -40,7 +42,8 @@ int main(int argc, char** argv) {
         "imu",
         "velodyne",
         "sick",
-        "stereo"
+        "stereo",
+        "stereo_inertial"
     };
 
     for (size_t i = 0; i < sensors.size(); ++i) {
@@ -53,7 +56,18 @@ int main(int argc, char** argv) {
     nh.getParam("dataset", dataset);
     std::string save_to;
     nh.getParam("save_to", save_to);
+    double t_1 = ros::Time::now().toSec();
+
+    if (sensors[SensorType::kStereoImu]) {
+        std::string imu_topic, left_topic, right_topic;
+        nh.getParam("imu_topic", imu_topic);
+        nh.getParam("left_topic", left_topic);
+        nh.getParam("right_topic", right_topic);
+        StereoImuConverter si(dataset, save_to, imu_topic, left_topic, right_topic);
+        si.Convert();
+    }
     double t0 = ros::Time::now().toSec();
+    double stereo_imu_cost = t0 - t_1;
 
 
     if(sensors[SensorType::kAltimeter]) {
@@ -153,6 +167,7 @@ int main(int argc, char** argv) {
 
 
     double all_cost = t9 - t0;
+    ROS_INFO("stereo_imu_cost %f\n", stereo_imu_cost);
     ROS_INFO("altimeter_cost %f\n", altimeter_cost);
     ROS_INFO("encoder_cost %f\n", encoder_cost);
     ROS_INFO("fog_cost %f\n", fog_cost);

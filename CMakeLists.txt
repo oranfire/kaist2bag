@@ -167,6 +167,7 @@ add_executable(${PROJECT_NAME}
         src/gps_converter.cpp
         src/vrs_converter.cpp
         src/imu_converter.cpp
+        src/stereo_imu_converter.cpp
         src/velodyne_converter.cpp
         src/sick_converter.cpp
         src/stereo_converter.cpp

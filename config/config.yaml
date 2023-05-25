@@ -1,35 +1,40 @@
-dataset: "/home/tao/sda/dataset/kaist/urban30/urban30-gangnam"
-save_to: "/home/tao/sda/dataset/kaist/urban30/urban30-gangnam/bag"
+dataset: "/home/oran/WS/WSb/DataSet/KAIST/urban39-pankyo"
+save_to: "/home/oran/WS/WSb/DataSet/KAIST/urban39-pankyo/bag"
 
-altimeter: true
+stereo_inertial: true
+imu_topic: "/imu/data_raw"
+left_topic: "/stereo/left/image_raw"
+right_topic: "/stereo/right/image_raw"
+
+altimeter: false
 altimeter_topic: "/altimeter_data"
 
-encoder: true
+encoder: false
 encoder_irp_topic: "/encoder_count"
 encoder_raw_topic: "/joint_states"
 
-fog: true
+fog: false
 fog_topic: "/dsp1760_data"
 
-gps: true
+gps: false
 gps_topic: "/gps/fix"
 
-vrs: true
+vrs: false
 vrs_topic: "/vrs_gps_data"
 
-imu: true
+imu: false
 imu_irp_topic: "/xsens_imu_data"
 imu_raw_topic: "/imu/data_raw"
 imu_mag_topic: "/imu/mag"
 
-velodyne: true
+velodyne: false
 velodyne_left_topic: "/ns2/velodyne_points"
 velodyne_right_topic: "/ns1/velodyne_points"
 
-sick: true
+sick: false
 sick_back_topic: "/lms511_back/scan"
 sick_middle_topic: "/lms511_middle/scan"
 
-stereo: true
+stereo: false
 stereo_left_topic: "/stereo/left/image_raw"
 stereo_right_topic: "/stereo/right/image_raw"
